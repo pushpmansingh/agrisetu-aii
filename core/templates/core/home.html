@@ -1,0 +1,301 @@
+{% extends "core/base.html" %}
+
+{% block title %}AgriSetu AI | Agriculture Intelligence{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-75">
+
+            <div class="col-lg-7">
+                <div class="hero-badge">
+                    <i class="bi bi-globe2"></i>
+                    BRICS AgriN Inspired Digital Public Infrastructure
+                </div>
+
+                <h1 class="hero-title">
+                    Intelligence for every farm.
+                    <span>Cooperation for every nation.</span>
+                </h1>
+
+                <p class="hero-text">
+                    AgriSetu AI combines local farm information, weather intelligence
+                    and AI-powered recommendations to help farmers make more
+                    climate-resilient and regenerative decisions.
+                </p>
+
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{% url 'advisory' %}" class="btn btn-success btn-lg hero-btn">
+                        <i class="bi bi-stars me-2"></i>
+                        Generate AI Advisory
+                    </a>
+
+                    <a href="{% url 'brics_hub' %}" class="btn btn-outline-light btn-lg">
+                        Explore BRICS Network
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
+
+                <div class="hero-stats row mt-5">
+                    <div class="col-4">
+                        <h3>5</h3>
+                        <p>BRICS Nations</p>
+                    </div>
+
+                    <div class="col-4">
+                        <h3>AI + Data</h3>
+                        <p>Farm Intelligence</p>
+                    </div>
+
+                    <div class="col-4">
+                        <h3>Local</h3>
+                        <p>Actionable Guidance</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-5 mt-5 mt-lg-0">
+
+                <div class="farm-intelligence-card">
+
+                    <div class="card-top">
+                        <div>
+                            <small>LIVE FARM INTELLIGENCE</small>
+                            <h4>Farm Advisory Engine</h4>
+                        </div>
+
+                        <div class="pulse-dot"></div>
+                    </div>
+
+                    <div class="weather-mini-card">
+                        <div>
+                            <i class="bi bi-cloud-sun weather-icon"></i>
+                        </div>
+
+                        <div>
+                            <small>Environmental Context</small>
+                            <h5>Weather + Soil + Crop</h5>
+                        </div>
+                    </div>
+
+                    <div class="intelligence-item">
+                        <i class="bi bi-cloud-rain"></i>
+                        <span>Climate & weather forecasting</span>
+                        <i class="bi bi-check-circle-fill ms-auto"></i>
+                    </div>
+
+                    <div class="intelligence-item">
+                        <i class="bi bi-moisture"></i>
+                        <span>Soil health assessment</span>
+                        <i class="bi bi-check-circle-fill ms-auto"></i>
+                    </div>
+
+                    <div class="intelligence-item">
+                        <i class="bi bi-tree"></i>
+                        <span>Regenerative recommendations</span>
+                        <i class="bi bi-check-circle-fill ms-auto"></i>
+                    </div>
+
+                    <div class="intelligence-item">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Climate risk alerts</span>
+                        <i class="bi bi-check-circle-fill ms-auto"></i>
+                    </div>
+
+                    <div class="ai-processing">
+                        <i class="bi bi-cpu"></i>
+                        AI converts environmental data into practical farm actions
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Problem / Solution -->
+<section class="section-padding">
+    <div class="container">
+
+        <div class="text-center section-heading">
+            <span>THE AGRISETU APPROACH</span>
+
+            <h2>
+                From fragmented agricultural data
+                to practical local action.
+            </h2>
+
+            <p>
+                A focused AI-powered workflow designed around what a farmer
+                actually needs to know before making the next decision.
+            </p>
+        </div>
+
+
+        <div class="row g-4 mt-3">
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-cloud-sun"></i>
+                    </div>
+
+                    <h4>1. Understand Local Conditions</h4>
+
+                    <p>
+                        Combine farmer-provided crop and soil information with
+                        real-time local weather and environmental context.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-cpu"></i>
+                    </div>
+
+                    <h4>2. Generate AI Guidance</h4>
+
+                    <p>
+                        Transform multiple data points into a structured,
+                        localized and practical agricultural advisory.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-arrow-repeat"></i>
+                    </div>
+
+                    <h4>3. Build Resilience Together</h4>
+
+                    <p>
+                        Keep local agricultural data sovereign while enabling
+                        anonymised insights and interoperable models to support
+                        BRICS cooperation.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Features -->
+<section class="intelligence-section">
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-5">
+                <span class="section-label">
+                    BUILT FOR THE HACKATHON CHALLENGE
+                </span>
+
+                <h2>
+                    Three focused tools.
+                    One connected agricultural intelligence network.
+                </h2>
+
+                <p class="section-description">
+                    AgriSetu AI is deliberately focused on the core challenges:
+                    localized agro-advisories, practical disease support and
+                    interoperable agricultural cooperation.
+                </p>
+            </div>
+
+
+            <div class="col-lg-7">
+
+                <a href="{% url 'advisory' %}" class="tool-card text-decoration-none">
+                    <div class="tool-number">01</div>
+
+                    <div>
+                        <h4>AI Agro-Advisory</h4>
+
+                        <p>
+                            Crop, soil and farm information + live weather
+                            context → structured climate-resilient recommendations.
+                        </p>
+                    </div>
+
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
+
+
+                <a href="{% url 'diagnosis' %}" class="tool-card text-decoration-none">
+                    <div class="tool-number">02</div>
+
+                    <div>
+                        <h4>Crop Disease Diagnosis</h4>
+
+                        <p>
+                            Image and symptom-based AI analysis with immediate,
+                            sustainable treatment and prevention guidance.
+                        </p>
+                    </div>
+
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
+
+
+                <a href="{% url 'brics_hub' %}" class="tool-card text-decoration-none">
+                    <div class="tool-number">03</div>
+
+                    <div>
+                        <h4>BRICS AgriN Cooperation Hub</h4>
+
+                        <p>
+                            Demonstrating shared standards, anonymised insights
+                            and cross-border cooperation without compromising
+                            local data sovereignty.
+                        </p>
+                    </div>
+
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="container text-center">
+
+        <span class="section-label">START WITH YOUR FARM</span>
+
+        <h2>
+            Better agricultural decisions begin with better context.
+        </h2>
+
+        <p>
+            Enter your farm details and let AgriSetu AI combine them with
+            environmental intelligence.
+        </p>
+
+        <a href="{% url 'advisory' %}" class="btn btn-light btn-lg px-4">
+            Generate My AI Advisory
+            <i class="bi bi-arrow-right ms-2"></i>
+        </a>
+
+    </div>
+</section>
+
+{% endblock %}

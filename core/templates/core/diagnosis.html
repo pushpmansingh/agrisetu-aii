@@ -1,0 +1,457 @@
+{% extends "core/base.html" %}
+
+{% block title %}Crop Diagnosis | AgriSetu AI{% endblock %}
+
+{% block content %}
+
+<section class="diagnosis-page">
+
+    <div class="container py-5">
+
+        <!-- Page Heading -->
+        <div class="diagnosis-heading text-center">
+
+            <span class="section-label">
+                AI CROP HEALTH ANALYSIS
+            </span>
+
+            <h1>Identify crop health problems early</h1>
+
+            <p>
+                Describe what you observe on your crop. You can also upload a
+                crop or leaf image for additional visual analysis.
+            </p>
+
+        </div>
+
+        <!-- Diagnosis Error -->
+        {% if diagnosis_error %}
+
+        <div class="alert alert-warning mt-4">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            {{ diagnosis_error }}
+        </div>
+
+        {% endif %}
+
+
+        <!-- Diagnosis Result -->
+        {% if diagnosis_data %}
+
+        <div class="diagnosis-result-card mt-5">
+
+            <div class="diagnosis-result-heading">
+
+                <div>
+                    <span class="section-label">
+                        AGRISETU AI ANALYSIS
+                    </span>
+
+                    <h2>Possible Crop Health Diagnosis</h2>
+
+                    <p>
+                        This analysis is based on the symptoms you provided and should
+                        be treated as guidance, not a guaranteed laboratory diagnosis.
+                    </p>
+                </div>
+
+                <div class="ai-generated-badge">
+                    <i class="bi bi-stars"></i>
+                    AI Generated
+                </div>
+
+            </div>
+
+
+            <!-- Possible Problem -->
+            <div class="diagnosis-highlight">
+
+                <div class="result-section-icon">
+                    <i class="bi bi-bug"></i>
+                </div>
+
+                <div>
+                    <span class="diagnosis-label">
+                        POSSIBLE PROBLEM
+                    </span>
+
+                    <h3>{{ diagnosis_data.possible_problem }}</h3>
+
+                    <div class="diagnosis-meta">
+
+                        <span>
+                            <strong>Confidence:</strong>
+                            {{ diagnosis_data.confidence_level }}
+                        </span>
+
+                        <span>
+                            <strong>Severity:</strong>
+                            {{ diagnosis_data.severity }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Likely Causes -->
+            <div class="diagnosis-result-section">
+
+                <div class="result-section-icon">
+                    <i class="bi bi-question-circle"></i>
+                </div>
+
+                <div>
+
+                    <h4>Likely Causes</h4>
+
+                    <ul class="advisory-list">
+                        {% for item in diagnosis_data.likely_causes %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- Immediate Actions -->
+            <div class="diagnosis-result-section">
+
+                <div class="result-section-icon">
+                    <i class="bi bi-lightning-charge"></i>
+                </div>
+
+                <div>
+
+                    <h4>Immediate Actions</h4>
+
+                    <ul class="advisory-list">
+                        {% for item in diagnosis_data.immediate_actions %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- Sustainable Treatment -->
+            <div class="diagnosis-result-section">
+
+                <div class="result-section-icon">
+                    <i class="bi bi-leaf"></i>
+                </div>
+
+                <div>
+
+                    <h4>Sustainable Treatment Suggestions</h4>
+
+                    <ul class="advisory-list">
+                        {% for item in diagnosis_data.sustainable_treatment %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- Prevention -->
+            <div class="diagnosis-result-section">
+
+                <div class="result-section-icon">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+
+                <div>
+
+                    <h4>Prevention Advice</h4>
+
+                    <ul class="advisory-list">
+                        {% for item in diagnosis_data.prevention_advice %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- Expert Note -->
+            <div class="diagnosis-expert-note">
+
+                <i class="bi bi-person-check"></i>
+
+                <div>
+                    <strong>When to seek expert help</strong>
+                    <p>{{ diagnosis_data.expert_note }}</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+        <!-- Diagnosis Form -->
+        <div class="row justify-content-center mt-5">
+
+            <div class="col-lg-9">
+
+                <div class="diagnosis-form-card">
+
+                    <form method="POST" enctype="multipart/form-data" id="diagnosis-form">
+
+                        {% csrf_token %}
+
+
+                        <!-- Crop Information -->
+                        <div class="form-section">
+
+                            <div class="form-section-title">
+
+                                <div class="section-icon">
+                                    <i class="bi bi-tree"></i>
+                                </div>
+
+                                <div>
+                                    <h4>Crop Information</h4>
+
+                                    <p>
+                                        Basic details help make the analysis more relevant.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+                                        Crop Name
+                                    </label>
+
+                                    <input type="text" class="form-control" name="crop"
+                                        placeholder="e.g. Tomato, Wheat, Rice" required>
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <label class="form-label">
+                                        Growth Stage
+                                        <span class="text-muted">(Optional)</span>
+                                    </label>
+
+                                    <select class="form-select" name="crop_stage">
+                                        <option value="">
+                                            I don't know
+                                        </option>
+
+                                        <option value="Seedling">
+                                            Seedling
+                                        </option>
+
+                                        <option value="Vegetative">
+                                            Vegetative Growth
+                                        </option>
+
+                                        <option value="Flowering">
+                                            Flowering
+                                        </option>
+
+                                        <option value="Fruiting">
+                                            Fruiting
+                                        </option>
+
+                                        <option value="Maturity">
+                                            Maturity / Harvest
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Symptoms -->
+                        <div class="form-section">
+
+                            <div class="form-section-title">
+
+                                <div class="section-icon">
+                                    <i class="bi bi-search-heart"></i>
+                                </div>
+
+                                <div>
+                                    <h4>What symptoms do you see?</h4>
+
+                                    <p>
+                                        Describe spots, yellowing, wilting, insects,
+                                        damaged leaves, mould, or any other changes.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <label class="form-label">
+                                Symptom Description
+                            </label>
+
+                            <textarea class="form-control" name="symptoms" rows="6"
+                                placeholder="Example: Small brown spots are appearing on older leaves. Some leaves are turning yellow around the edges..."
+                                required></textarea>
+
+                        </div>
+
+
+                        <!-- Image Upload -->
+                        <div class="form-section">
+
+                            <div class="form-section-title">
+
+                                <div class="section-icon">
+                                    <i class="bi bi-camera"></i>
+                                </div>
+
+                                <div>
+                                    <h4>Upload Crop Image</h4>
+
+                                    <p>
+                                        Optional. Upload a clear image of the affected
+                                        leaf or crop for visual AI analysis.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="image-upload-area">
+
+                                <i class="bi bi-cloud-arrow-up"></i>
+
+                                <label for="crop-image">
+                                    Choose an image
+                                </label>
+
+                                <p>
+                                    JPG, JPEG or PNG — clear close-up images work best.
+                                </p>
+
+                                <input type="file" id="crop-image" name="crop_image"
+                                    accept=".jpg,.jpeg,.png,image/jpeg,image/png">
+
+                                <div id="image-preview-container" class="image-preview-wrapper d-none mt-3">
+                                    <img id="image-preview" src="#" alt="Crop leaf preview" width="160" height="120" style="object-fit: cover; border-radius: 12px; border: 2px solid var(--accent-green);">
+                                    <div class="mt-2"><small class="text-success"><i class="bi bi-check-circle me-1"></i>Image selected</small></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Important Notice -->
+                        <div class="diagnosis-note">
+
+                            <i class="bi bi-info-circle"></i>
+
+                            <p>
+                                AI provides a possible diagnosis based on the information
+                                available. For severe or widespread crop problems,
+                                verify the diagnosis with a local agricultural expert.
+                            </p>
+
+                        </div>
+
+
+                        <!-- Submit -->
+                        <div class="form-submit-area">
+
+                            <button type="submit" id="submit-diagnosis-btn" class="btn generate-advisory-btn">
+                                <i class="bi bi-search me-2"></i>
+                                Analyze Crop Health
+                            </button>
+
+                        </div>
+
+                        <!-- Live Loading Status Banner -->
+                        <div id="diagnosis-loading-banner" class="form-loading-status d-none mt-4">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="spinner-border spinner-border-sm text-success" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <div>
+                                    <strong class="d-block text-dark">Analyzing Crop Health...</strong>
+                                    <small class="text-muted">Evaluating symptoms & visual patterns with Gemini AI.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('diagnosis-form');
+    var imageInput = document.getElementById('crop-image');
+    var previewContainer = document.getElementById('image-preview-container');
+    var previewImg = document.getElementById('image-preview');
+
+    if (imageInput && previewContainer && previewImg) {
+        imageInput.addEventListener('change', function() {
+            var file = this.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewContainer.classList.remove('d-none');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.classList.add('d-none');
+            }
+        });
+    }
+
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            if (!form.checkValidity()) return;
+            var btn = document.getElementById('submit-diagnosis-btn');
+            var banner = document.getElementById('diagnosis-loading-banner');
+            if (btn) {
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Analyzing Crop...';
+                setTimeout(function() { btn.disabled = true; }, 10);
+            }
+            if (banner) {
+                banner.classList.remove('d-none');
+            }
+        });
+    }
+});
+</script>
+
+{% endblock %}
